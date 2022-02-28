@@ -1,5 +1,5 @@
 /*
- tag: BIT, RMQ, medium
+ tag: segment tree, RMQ, medium
  */
 #include <iostream>
 #include <algorithm>
