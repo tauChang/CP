@@ -1,5 +1,5 @@
 /*
- tag: segment tree, bit, tree flattening, medium
+ tag: segment tree, tree flattening, medium
  */
 #include <iostream>
 #include <algorithm>
