@@ -1,5 +1,5 @@
 /*
- tag: graph, medium
+ tag: unsolved
  */
 #include <iostream>
 #include <algorithm>
@@ -19,8 +19,8 @@ public:
 void push(Node* x){
     if(!x->lc) x->lc = new Node();
     if(!x->rc) x->rc = new Node();
-    x->lc->tag = x->tag;
-    x->rc->tag = x->tag;
+    x->lc->tag += x->tag;
+    x->rc->tag += x->tag;
     x->val += x->tag;
     x->tag = 0;
 }
@@ -42,15 +42,15 @@ void add(Node* x, int tl, int tr, int l, int r, int v){
     x->val = max(x->lc->val+x->lc->tag, x->rc->val+x->rc->tag);
 }
 
-int query(Node* x, int tl, int tr, int l, int r){
-    if(!x) return 0;
-    if(tl == l && tr == r) return x ? x->val+x->tag : 0;
-    push(x);
-    int tm = (tl+tr)/2;
-    if(r <= tm) return query(x->lc, tl, tm, l, r);
-    if(l > tm) return query(x->rc, tm+1, tr, l, r);
-    return max(query(x->lc, tl, tm, l, tm), query(x->rc, tm+1, tr, tm+1, r));
-}
+// int query(Node* x, int tl, int tr, int l, int r){
+//     if(!x) return 0;
+//     if(tl == l && tr == r) return x->val+x->tag;
+//     push(x);
+//     int tm = (tl+tr)/2;
+//     if(r <= tm) return query(x->lc, tl, tm, l, r);
+//     if(l > tm) return query(x->rc, tm+1, tr, l, r);
+//     return max(query(x->lc, tl, tm, l, tm), query(x->rc, tm+1, tr, tm+1, r));
+// }
 
 int main(){
     int n;
@@ -61,5 +61,6 @@ int main(){
         scanf("%d %d %d", &l, &r, &w);
         add(root, 0, MAX, l, r, w);
     }
-    printf("%d", query(root, 0, MAX, 0, MAX));
+    // printf("%d", query(root, 0, MAX, 0, MAX));
+    printf("%d", root->val+root->tag);
 }
